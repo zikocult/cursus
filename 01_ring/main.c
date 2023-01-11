@@ -11,9 +11,10 @@ int main(int argc, char **argv)
 	  char str[] = "GeeksForGeeks is for programming geeks.";
 	  char str2[] = "GeeksForGeeks is for programming geeks.";
 	  printf("La frase original = %s\n", str);
-    printf("El resultado de mi funcion = %s", ft_memset(str + 4, 'n', 10));
-	  printf("\nEl resultado del original  = %s \n", memset(str2 + 10, 'n', 6) );
-    printf("Str = %s\nStr2 = %s", str, str2);
+    ft_bzero(str + 6, 10);
+    bzero(str2 + 3, 6);
+    printf("El resultado de mi funcion = %s", str);
+	  printf("\nEl resultado del original  = %s \n", str2);
   }
 	return (0);
 }
