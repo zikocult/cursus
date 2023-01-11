@@ -6,7 +6,7 @@
 /*   By: gbarulls <gbarulls@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:12:31 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/01/11 10:35:28 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:24:23 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ int	ft_strlen(const char *str);
 
 void *ft_memset (void *s, int c, size_t n)
 {
-	int	count;
+	unsigned char *ptr;
 
-	count = 0;
-	while (s[count] != '\0' || count < n)
+	ptr = (unsigned char*)s;
+	while (n > 0)
 	{
-		s = &c;
-		count++;
+		*ptr = (unsigned char)c;
+    ptr++;
+		n--;
 	}
 	return (s);
 }
