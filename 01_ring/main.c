@@ -4,6 +4,7 @@
 #include <string.h>
 
 void	*ft_memmove(void *dest, const void *src, size_t n);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 int main(int argc, char **argv)
 {
@@ -14,8 +15,8 @@ int main(int argc, char **argv)
 	char str2[100] = "for programming geeks.";
 	char str3[100] = "GeeksForGeeks is ";
 	char str4[100] = "for programming geeks.";
-	printf("Mi funcion   = %s\n", ft_memmove(str, str2, 12));
-	printf("Funcion real = %s\n", memmove(str3, str4, 12));
+	printf("Mi funcion   = %d\n", ft_strlcpy(str, str2, 12));
+	printf("Funcion real = %s\n", strlcpy(str3, str4, 12));
 //  ft_bzero(str + 6, 10);
 //  bzero(str2 + 3, 6);
 //  printf("El resultado de mi funcion = %s", str);
