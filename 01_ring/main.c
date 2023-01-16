@@ -1,23 +1,25 @@
 #include "libft.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_strchr(const char *str, int c);
 
 int main(int argc, char **argv)
 {
 	if (argc >= 1)
   {
     int proba;
-	char str[100] = "GeeksForGeeks is ";
-	char str2[100] = "for programming geeks.";
-	char str3[100] = "GeeksForGeeks is ";
-	char str4[100] = "for programming geeks.";
-	printf("Mi funcion   = %d\n", ft_strlcpy(str, str2, 12));
-	printf("Funcion real = %s\n", strlcpy(str3, str4, 12));
+	char str[100] = "abcdefghijkl cagontoloquesemenea ";
+	char str2[100] = "mnopqrstuvwxyz.";
+	char str3[100] = "abcdefghijkl cagontoloquesemenea";
+	char str4[100] = "mnopqrstuvwxyz. ";
+	printf("Mi funcion   = %s\n", ft_strchr(str, 'l'));
+	printf("Funcion original = %s\n", strchr(str3, 'l'));
 //  ft_bzero(str + 6, 10);
 //  bzero(str2 + 3, 6);
 //  printf("El resultado de mi funcion = %s", str);

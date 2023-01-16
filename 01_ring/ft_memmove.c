@@ -6,7 +6,7 @@
 /*   By: gbarulls <gbarulls@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:58:37 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/01/11 20:01:37 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:38:31 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,28 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char	*ptr;
-	unsigned char	*origin;
+	char	*destiny;
+	char	*source;
+	size_t	i;
 
-	ptr = (unsigned char *)dest;
-	origin = (unsigned char *)src;
-	while (n > 0 && *origin != '\0')
+	destiny = (char *)dest;
+	source = (char *)src;
+	i = 0;
+	if (destiny > source)
 	{
-		*ptr = *origin;
-		*origin = '\0';
-		ptr++;
-		origin++;
-		n--;
+		while (n > 0)
+		{
+			destiny[n] = source[n];
+			n--;
+		}
+	}
+	else
+	{
+		while (i < n)
+		{
+			destiny[i] = source[i];
+			i++;
+		}
 	}
 	return (dest);
 }
