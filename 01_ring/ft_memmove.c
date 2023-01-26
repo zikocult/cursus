@@ -16,7 +16,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	int	i;
 
-	if (!dst || !src)
+	if (!dst && !src)
 		return (NULL);
 	if (dst > src)
 	{
@@ -38,3 +38,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
+
+//He debido poner un && en vez de un || en la validación
+// inicial para que no fallara en la validación

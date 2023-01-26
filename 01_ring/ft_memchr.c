@@ -14,17 +14,18 @@
 
 void	*ft_memchr(const void *str, int c, size_t n)
 {
-	char	*ptr_str;
+	size_t	i;
 
-	ptr_str = (char *)str;
-	while (*ptr_str != '\0' && n > 0)
+	i = 0;
+	while (i < n)
 	{
-		if (*ptr_str == c)
-		{
-			return (ptr_str);
-		}
-		ptr_str++;
-		n--;
+		if (*(unsigned char *)(str + i) == (unsigned char)c)
+			return ((void *)(str + i));
+		i++;
 	}
 	return (NULL);
 }
+
+// Quitando validación inicial, parece que da error en Paco
+// if (!str)
+// 	return (NULL);

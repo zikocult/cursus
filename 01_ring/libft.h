@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdio.h>
+# include <stdlib.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -37,5 +38,6 @@ void	*ft_memchr(const void *str, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *s1, const char *s2, size_t len);
 int		ft_atoi(const char *nptr);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif
