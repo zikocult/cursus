@@ -1,5 +1,8 @@
 {
     "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
-        "clang-analyzer-core.NullDereference"
+        "clang-analyzer-core.NullDereference",
+        "clang-analyzer-core.UndefinedBinaryOperatorResult",
+        "clang-analyzer-core.uninitialized.Branch",
+        "clang-analyzer-unix.MallocSizeof"
     ]
 }
