@@ -12,19 +12,6 @@
 
 #include "libft.h"
 
-static char	*ft_init(char *str, char const *s1)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	return (str);
-}
-
 static char	*ft_erase(char *str, char const *set)
 {
 	size_t	i;
@@ -60,27 +47,27 @@ char	*ft_strtrim(char const *s1, char const *set)
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1)) + 1);
 	if (!str)
 		return (NULL);
-	ft_init(str, s1);
+	str = ft_strdup(s1);
 	ft_erase(str, set);
 	return (str);
 }
 
-int main(void)
-{
-	char *str;
-	// char *str2;
-	// char *str3;
-	char frase1[100] = "Hola Mundo abcdefiou";
-	char frase2[100] = "";
-	char frase3[100] = "Habia una vez un barco en Maracana de la Selva";
-	str = ft_strtrim(frase1, "aeiou");
-	printf("%s\n", str);
-	free (str);
-	str = ft_strtrim(frase2, "aeiou");
-	printf("%s\n", str);
-	free(str);
-	str = ft_strtrim(frase3, "n");
-	printf("%s\n", str);
-	free(str);
-	return (0);
-}
+// int main(void)
+// {
+// 	char *str;
+// 	// char *str2;
+// 	// char *str3;
+// 	char frase1[100] = "Hola Mundo abcdefiou";
+// 	char frase2[100] = "";
+// 	char frase3[100] = "Habia una vez un barco en Maracana de la Selva";
+// 	str = ft_strtrim(frase1, "aeiou");
+// 	printf("%s\n", str);
+// 	free (str);
+// 	str = ft_strtrim(frase2, "aeiou");
+// 	printf("%s\n", str);
+// 	free(str);
+// 	str = ft_strtrim(frase3, "n");
+// 	printf("%s\n", str);
+// 	free(str);
+// 	return (0);
+// }

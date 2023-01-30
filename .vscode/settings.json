@@ -3,6 +3,7 @@
         "clang-analyzer-core.NullDereference",
         "clang-analyzer-core.UndefinedBinaryOperatorResult",
         "clang-analyzer-core.uninitialized.Branch",
-        "clang-analyzer-unix.MallocSizeof"
+        "clang-analyzer-unix.MallocSizeof",
+        "clang-analyzer-unix.Malloc"
     ]
 }
