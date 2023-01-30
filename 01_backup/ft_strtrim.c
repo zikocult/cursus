@@ -25,14 +25,14 @@ static char	*ft_init(char *str, char const *s1)
 	return (str);
 }
 
-static char	*ft_erase(char *str, char const *set)
+static char	*ft_erase(char *str, char const *set, size_t len)
 {
 	size_t	i;
 	size_t	j;
 	size_t	k;
 
 	i = 0;
-	while (i < (size_t)ft_strlen(set))
+	while (i < (size_t)ft_strlen(set) && str[i])
 	{
 		j = 0;
 		while (str[j])
@@ -61,7 +61,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!str)
 		return (NULL);
 	ft_init(str, s1);
-	ft_erase(str, set);
+	ft_erase(str, set, ft_strlen(str));
 	return (str);
 }
 
@@ -79,7 +79,7 @@ int main(void)
 	str = ft_strtrim(frase2, "aeiou");
 	printf("%s\n", str);
 	free(str);
-	str = ft_strtrim(frase3, "n");
+	str = ft_strtrim(frase3, "");
 	printf("%s\n", str);
 	free(str);
 	return (0);
