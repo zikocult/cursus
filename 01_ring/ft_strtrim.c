@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarulls <gbarulls@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:53:38 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/01/30 20:53:39 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/01/30 23:33:20 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
