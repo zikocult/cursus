@@ -6,7 +6,7 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:57:37 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/01/31 22:20:29 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/01/31 23:15:29 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,4 @@ char	*ft_itoa(int n)
 // 	free (str);
 // 	return (0);
 // }
+// Tinc que controlar el valor = -2147483648 i ja estaria tot OK.
