@@ -1,51 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim_entendí_otra_cosa.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 19:08:52 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/01/31 19:40:13 by gbarulls         ###   ########.fr       */
+/*   Created: 2023/01/30 20:53:38 by gbarulls          #+#    #+#             */
+/*   Updated: 2023/01/31 19:08:08 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_char_set(char c, char const *set)
+static char	*ft_erase(char *str, char const *set)
 {
 	size_t	i;
+	size_t	j;
+	size_t	k;
 
 	i = 0;
-	while (set[i])
+	while (i < (size_t)ft_strlen(set))
 	{
-		if (set[i] == c)
-			return (1);
+		j = 0;
+		while (str[j])
+		{
+			if (str[j] == set[i])
+			{
+				k = j;
+				while (str[k])
+				{
+					str[k] = str[k + 1];
+					k++;
+				}
+			}
+			j++;
+		}
 		i++;
 	}
-	return (0);
+	return (str);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*str;
-	size_t	i;
-	size_t	start;
-	size_t	end;
 
-	start = 0;
-	while (s1[start] && ft_char_set(s1[start], set))
-		start++;
-	end = ft_strlen(s1);
-	while (end > start && ft_char_set(s1[end - 1], set))
-		end--;
-	str = (char *)ft_calloc(sizeof(*s1), (end - start + 1));
+	str = (char *)ft_calloc(sizeof(char), (ft_strlen(s1)) + 1);
 	if (!str)
 		return (NULL);
-	i = 0;
-	while (start < end)
-		str[i++] = s1[start++];
-	str[i] = 0;
+	str = ft_strdup(s1);
+	ft_erase(str, set);
 	return (str);
 }
 
@@ -54,16 +57,16 @@ char	*ft_strtrim(char const *s1, char const *set)
 // 	char *str;
 // 	// char *str2;
 // 	// char *str3;
-// 	char frase1[100] = "    Hola Mundo abcdefiou";
-// 	char frase2[100] = "Vamos a ver\t";
-// 	char frase3[100] = "kakkkkHabia una vez un barco en la Selvakkka";
-// 	str = ft_strtrim(frase1, " ");
+// 	char frase1[100] = "Hola Mundo abcdefiou";
+// 	char frase2[100] = "lorem \n ipsum \t dolor \n sit \t amet";
+// 	char frase3[100] = "Habia una vez un barco en Maracana de la Selva";
+// 	str = ft_strtrim(frase1, "aeiou");
 // 	printf("%s\n", str);
 // 	free (str);
-// 	str = ft_strtrim(frase2, "\t");
+// 	str = ft_strtrim(frase2, "aeiou");
 // 	printf("%s\n", str);
 // 	free(str);
-// 	str = ft_strtrim(frase3, "kaH");
+// 	str = ft_strtrim(frase3, "n");
 // 	printf("%s\n", str);
 // 	free(str);
 // 	return (0);
