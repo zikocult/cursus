@@ -1,5 +1,6 @@
 #documentation
 *.pdf
+*.txt
 
 # Prerequisites
 *.d
