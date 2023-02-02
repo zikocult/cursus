@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarulls <gbarulls@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:06:52 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/01/30 20:06:54 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/01 23:57:23 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,34 @@ char	*ft_strjoin(char const *s1, char const *s2)
 // 	char *str;
 // 	// char *str2;
 // 	// char *str3;
-
+//
 // 	char frase1 [100]= "Hola ";
 // 	char frase2 [100]= "Mundo!";
 // 	char frase3 [100] = "";
-
+//
 // 	str = ft_strjoin(frase1, frase2);
 // 	printf("%s\n", str);
 // 	free (str);
-
+//
 // 	str = ft_strjoin(frase1, frase3);
 // 	printf("%s\n", str);
 // 	free (str);
-
+//
 // 	str = ft_strjoin(frase2, frase2);
 // 	printf("%s\n", str);
 // 	free (str);
-
+//
 // 	str = ft_strjoin(frase3, frase2);
 // 	printf("%s\n", str);
 // 	free(str);
-
+//
 // 	str = ft_strjoin(frase3, frase1);
 // 	printf("%s\n", str);
 // 	free(str);
-
+//
 // 	str = ft_strjoin(frase3, frase3);
 // 	printf("%s\n", str);
 // 	free(str);
-
+//
 // 	return (0);
 // }

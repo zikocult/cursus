@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 21:03:58 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/01 23:58:24 by gbarulls         ###   ########.fr       */
+/*   Created: 2023/02/02 00:07:59 by gbarulls          #+#    #+#             */
+/*   Updated: 2023/02/02 00:08:31 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	ft_putendl_fd(char *s, int fd)
 {
-	write(fd, &c, 1);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }
-
-// Para las pruebas hay que incluir #include <fcntl.h>
-// int main (void)
-// {
-// 	int fd;
-//
-// 	fd = open("/Users/gbarulls/tests/cursus/01_ring/prueba.txt", O_WRONLY);
-// 	if (fd == -1)
-// 		printf("Error al abrir el archivo\n");
-// 	ft_putchar_fd('a', fd);
-// 	close(fd);
-// 	return (0);
-// }

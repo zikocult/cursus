@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarulls <gbarulls@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:36:54 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/01/30 17:36:57 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/01 23:59:05 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strdup(const char *s)
 
 	// Idea descartada, pues no pone el último valor a 0
 	// ft_memcpy(ptr, s, count);
-//
+	//
 	// int main(void)
 	// {
 	// 	char *str;
