@@ -6,7 +6,7 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 23:59:19 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/01 23:59:22 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/02 22:40:45 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,4 @@ char **ft_split(char const *s, char c)
 	un cop tinguem el tamany, s'haura de guardar en una dimensio de un malloc
 	el apuntador, de apuntador es el que donara la seguent dimensio
 	*/
-	}
+}
