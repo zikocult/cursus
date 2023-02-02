@@ -6,13 +6,13 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:05:42 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/02 22:16:31 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/02 23:02:08 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_copy(char *dst, const char *src, size_t dstsize)
+static size_t	ft_copy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	count;
 	size_t	i;
