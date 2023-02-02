@@ -6,7 +6,7 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:57:37 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/01/31 21:47:51 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:32:40 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,6 @@ static int	ft_intlen(int n)
 	return (count);
 }
 
-static void	ft_converse(char *str, int n)
-{
-	int	i;
-
-	i = 0;
-	if (n == 0)
-		str[0] = '0';
-	while (n != 0)
-	{
-		str[i] = (char)(n % 10 + 48);
-		n /= 10;
-		i++;
-	}
-}
-
 static void	ft_isneg(char *str, int len)
 {
 	while (len >= 1)
@@ -52,27 +37,35 @@ static void	ft_isneg(char *str, int len)
 	str[0] = '-';
 }
 
-static void	ft_reverse(char *str, int is_neg, int len)
+static void	ft_converse(char *str, int n, int len, int is_neg)
 {
-	char	temp;
-	int		i;
-
+	if (n == 0)
+		str[0] = '0';
 	if (is_neg == -1)
 	{
 		ft_isneg(str, len);
-		i = 1;
 		len++;
 	}
-	else
-		i = 0;
-	while (i <= len)
+	while (n != 0)
 	{
-		temp = str[len - 1];
-		str[len - 1] = str[i];
-		str[i] = temp;
+		str[len - 1] = (char)(n % 10 + 48);
+		n /= 10;
 		len--;
-		i++;
 	}
+}
+
+char	*ft_int_min(char *str, int n, int len)
+{
+	*(str + 0) = '-';
+	*(str + 1) = '2';
+	n = 147483648;
+	while (n != 1)
+	{
+		str[len - 1] = (char)(n % 10 + 48);
+		n /= 10;
+		len--;
+	}
+	return (str);
 }
 
 char	*ft_itoa(int n)
@@ -95,14 +88,15 @@ char	*ft_itoa(int n)
 	}
 	if (!str)
 		return (NULL);
-	ft_converse(str, n);
-	ft_reverse(str, is_neg, len);
+	if (n == -2147483648)
+		return (ft_int_min(str, n, len));
+	ft_converse(str, n, len, is_neg);
 	return (str);
 }
 
 // int main (void)
 // {
-// 	int num = -10004;
+// 	int num = 2147483647;
 // 	char *str;
 // 	str = ft_itoa(num);
 // 	printf("%s", str);

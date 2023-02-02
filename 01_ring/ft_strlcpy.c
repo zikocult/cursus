@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarulls <gbarulls@student.42barcel>       +#+  +:+       +#+        */
+/*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:11:39 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/01/13 17:36:12 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/02 22:15:26 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
