@@ -6,16 +6,16 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 23:59:19 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/07 17:35:07 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/07 17:51:01 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_word(const char *str, char c)
+static int count_word(const char *str, char c)
 {
-	int	i;
-	int	count;
+	int i;
+	int count;
 
 	i = 0;
 	count = 0;
@@ -28,7 +28,7 @@ static int	count_word(const char *str, char c)
 	return (count);
 }
 
-static char	**error_mal(char **split, int count)
+static char **error_mal(char **split, int count)
 {
 	while (count-- > 0)
 		free(split[count]);
@@ -36,10 +36,10 @@ static char	**error_mal(char **split, int count)
 	return (NULL);
 }
 
-static char	*dup_word(int start, int end, const char *str)
+static char *dup_word(int start, int end, const char *str)
 {
-	char	*splitted;
-	int		i;
+	char *splitted;
+	int i;
 
 	i = 0;
 	splitted = (char *)malloc(sizeof(char) * (end - start + 2));
@@ -51,14 +51,14 @@ static char	*dup_word(int start, int end, const char *str)
 	return (splitted);
 }
 
-char	**ft_split(char const *s, char c)
+char **ft_split(char const *s, char c)
 {
-	int		i;
-	int		start;
-	int		count;
-	char	**split;
+	int i;
+	int start;
+	int count;
+	char **split;
 
-	split = (char **)malloc((sizeof(char *) * (count_word(s, c) + 2)));
+	split = (char **)malloc((sizeof(char *) * (count_word(s, c) + 1)));
 	if (!split)
 		return (NULL);
 	i = 0;
@@ -79,7 +79,7 @@ char	**ft_split(char const *s, char c)
 	return (split);
 }
 
-int main (void)
+int main(void)
 {
 	char **splitted;
 	char prueba1[100] = "AbraCadabra pata de cabra";
