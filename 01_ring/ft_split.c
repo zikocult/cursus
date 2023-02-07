@@ -6,7 +6,7 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 23:59:19 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/07 17:57:11 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:59:09 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,22 @@
 static int	count_word(const char *str, char c)
 {
 	int	i;
-	int	count;
+	int	trigger;
 
 	i = 0;
-	count = 0;
-	while (str[i])
+	trigger = 0;
+	while (*str)
 	{
-		if (str[i] == c)
-			count++;
-		i++;
+		if (*str != c && trigger == 0)
+		{
+			trigger = 1;
+			i++;
+		}
+		else if (*str == c)
+			trigger = 0;
+		str++;
 	}
-	return (count);
+	return (i);
 }
 
 static char	**error_mal(char **split, int count)
@@ -36,46 +41,54 @@ static char	**error_mal(char **split, int count)
 	return (NULL);
 }
 
-static char	*dup_word(int start, int end, const char *str)
+static char	*word_dup(const char *str, int start, int end)
 {
-	char	*splitted;
+	char	*word;
 	int		i;
 
 	i = 0;
-	splitted = (char *)malloc(sizeof(char) * (end - start + 2));
-	if (!splitted)
-		return (NULL);
-	while (start <= end)
-		splitted[i++] = str[start++];
-	splitted[i] = '\0';
-	return (splitted);
+	word = malloc((end - start + 1) * sizeof(char));
+	while (start < end)
+		word[i++] = str[start++];
+	word[i] = '\0';
+	return (word);
+}
+
+static char	**ft_strvalida(const char *s, char c, char **split)
+{
+	int	end;
+	int	j;
+	int	start;
+
+	j = 0;
+	end = 0;
+	start = -1;
+	while (end <= ft_strlen(s))
+	{
+		if (s[end] != c && start < 0)
+			start = end;
+		else if ((s[end] == c || end == ft_strlen(s)) && start >= 0)
+		{
+			split[j] = word_dup(s, start, end);
+			if (split[j] == NULL)
+				return (error_mal(split, j));
+			j++;
+			start = -1;
+		}
+		end++;
+	}
+	split[j] = 0;
+	return (split);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		start;
-	int		count;
 	char	**split;
 
-	split = (char **)malloc((sizeof(char *) * (count_word(s, c) + 1)));
-	if (!split)
+	split = malloc((count_word(s, c) + 1) * sizeof(char *));
+	if (!s || !split)
 		return (NULL);
-	i = 0;
-	start = 0;
-	count = 0;
-	while (s[i])
-	{
-		if (s[i] == c || i + 1 == ft_strlen(s))
-		{
-			split[count] = dup_word(start, i, s);
-			if (split[count] == NULL)
-				return (error_mal(split, count));
-			count++;
-			start = i + 1;
-		}
-		i++;
-	}
+	split = ft_strvalida (s, c, split);
 	return (split);
 }
 
@@ -97,7 +110,7 @@ char	**ft_split(char const *s, char c)
 // 	for (int i = 0; splitted[i] != NULL; i++)
 // 		free(splitted[i]);
 // 	printf("**********************************\n");
-// 	splitted = ft_split(prueba3, '\0');
+// 	splitted = ft_split(prueba3, ' ');
 // 	for (int i = 0; splitted[i] != NULL; i++)
 // 		printf("%s\n", splitted[i]);
 // 	for (int i = 0; splitted[i] != NULL; i++)
