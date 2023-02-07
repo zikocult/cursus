@@ -6,22 +6,22 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 23:59:19 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/07 11:12:10 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/07 17:35:07 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_word(const char *s, char c)
+static int	count_word(const char *str, char c)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (s[i])
+	while (str[i])
 	{
-		if (s[i] == c)
+		if (str[i] == c)
 			count++;
 		i++;
 	}
@@ -34,6 +34,21 @@ static char	**error_mal(char **split, int count)
 		free(split[count]);
 	free(split);
 	return (NULL);
+}
+
+static char	*dup_word(int start, int end, const char *str)
+{
+	char	*splitted;
+	int		i;
+
+	i = 0;
+	splitted = (char *)malloc(sizeof(char) * (end - start + 2));
+	if (!splitted)
+		return (NULL);
+	while (start <= end)
+		splitted[i++] = str[start++];
+	splitted[i] = '\0';
+	return (splitted);
 }
 
 char	**ft_split(char const *s, char c)
@@ -51,13 +66,11 @@ char	**ft_split(char const *s, char c)
 	count = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == c || i + 1 == ft_strlen(s))
 		{
-			split[count] = (char *)malloc(sizeof(char) * (i - start + 1));
-			if (!split[count])
+			split[count] = dup_word(start, i, s);
+			if (split[count] == NULL)
 				return (error_mal(split, count));
-			while (start < i)
-				split[count] = (char *)(s + start++);
 			count++;
 			start = i + 1;
 		}
@@ -66,20 +79,28 @@ char	**ft_split(char const *s, char c)
 	return (split);
 }
 
-			// split[count][i - start] = '\0';
-			// queda pendiente colocar esto para la última
-// int main (void){
-// 	char **splitted;
-// 	char prueba1[100] = "Hola Mundo!";
-// 	int i = 0;
-// 	splitted = ft_split(prueba1, 'o');
-// 	while (*splitted[i] != '\0')
-// 	{
-// 		printf("%s", splitted[i]);
-// 		i++;
-// 	}
-// 	// while (i-- > 0)
-// 	// 	free(splitted[i]);
-// 	// free(splitted);
-// 	return (0);
-// }
+int main (void)
+{
+	char **splitted;
+	char prueba1[100] = "AbraCadabra pata de cabra";
+	char prueba2[100] = " ";
+	char prueba3[100] = "hello!";
+	splitted = ft_split(prueba1, 'a');
+	for (int i = 0; splitted[i] != NULL; i++)
+		printf("%s\n", splitted[i]);
+	for (int i = 0; splitted[i] != NULL; i++)
+		free(splitted[i]);
+	printf("**********************************\n");
+	splitted = ft_split(prueba2, 'a');
+	for (int i = 0; splitted[i] != NULL; i++)
+		printf("%s\n", splitted[i]);
+	for (int i = 0; splitted[i] != NULL; i++)
+		free(splitted[i]);
+	printf("**********************************\n");
+	splitted = ft_split(prueba3, '\0');
+	for (int i = 0; splitted[i] != NULL; i++)
+		printf("%s\n", splitted[i]);
+	for (int i = 0; splitted[i] != NULL; i++)
+		free(splitted[i]);
+	return (0);
+}
