@@ -6,31 +6,32 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 23:59:19 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/07 20:39:16 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/07 21:50:16 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-static int	count_word(const char *str, char c)
+static char	*ft_strndup(const char *s, int n)
 {
-	int	i;
-	int	trigger;
+	int		i;
+	char	*str;
 
 	i = 0;
-	trigger = 0;
-	while (*str)
+	str = NULL;
+	if (n == 0)
+		return (NULL);
+	str = (char *)malloc(sizeof(char) * (n + 1));
+	if (str == 0)
+		return (NULL);
+	while (i < n)
 	{
-		if (*str != c && trigger == 0)
-		{
-			trigger = 1;
-			i++;
-		}
-		else if (*str == c)
-			trigger = 0;
-		str++;
+		str[i] = s[i];
+		i++;
 	}
-	return (i);
+	str[i] = '\0';
+	return (str);
 }
 
 static char	**error_mal(char **split, int count)
@@ -41,54 +42,51 @@ static char	**error_mal(char **split, int count)
 	return (NULL);
 }
 
-static char	*word_dup(const char *str, int start, int end)
+static int	count_word(char const *str, char c)
 {
-	char	*word;
-	int		i;
+	int	i;
+	int	control;
 
 	i = 0;
-	word = malloc((end - start + 1) * sizeof(char));
-	while (start < end)
-		word[i++] = str[start++];
-	word[i] = '\0';
-	return (word);
-}
-
-static char	**ft_strvalida(const char *s, char c, char **split)
-{
-	int	end;
-	int	j;
-	int	start;
-
-	j = 0;
-	end = 0;
-	start = -1;
-	while (end <= ft_strlen(s))
+	control = 0;
+	while (*str)
 	{
-		if (s[end] != c && start < 0)
-			start = end;
-		else if ((s[end] == c || end == ft_strlen(s)) && start >= 0)
+		if (*str != c && control == 0)
 		{
-			split[j] = word_dup(s, start, end);
-			if (split[j] == NULL)
-				return (error_mal(split, j));
-			j++;
-			start = -1;
+			control = 1;
+			i++;
 		}
-		end++;
+		else if (*str == c)
+			control = 0;
+		str++;
 	}
-	split[j] = 0;
-	return (split);
+	return (i);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**split;
+	int		count;
+	int		end;
+	int		start;
 
-	split = malloc((count_word(s, c) + 1) * sizeof(char *));
-	if (!s || !split)
+	count = 0;
+	end = 0;
+	split = (char **)malloc(sizeof(char *) * (count_word(s, c) + 1));
+	if (!split)
 		return (NULL);
-	split = ft_strvalida (s, c, split);
+	while (count < count_word(s, c) && s[end] != '\0')
+	{
+		while (s[end] == c)
+			end++;
+		start = end;
+		while (s[end] != c && s[end] != '\0')
+			end++;
+		split[count] = ft_strndup(&s[start], end - start);
+		if (split[count++] == 0)
+			return (error_mal(split, count));
+	}
+	split[count] = NULL;
 	return (split);
 }
 
