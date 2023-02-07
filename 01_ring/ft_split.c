@@ -6,57 +6,80 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 23:59:19 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/03 17:43:16 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:12:10 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
-- S'hauran de contar les paraules fins al char c, contant aixi el tamany del primer malloc
-- El apuntador, de apuntador es el que donara la seguent dimensio, es a dir, haure de fer el primer malloc sobre el numero de paraules
-- 
-*/
 
 #include "libft.h"
-#include <stdio.h>
 
-static int ft_count_words(char const *s, char c)
+static int	count_word(const char *s, char c)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (*(s + i) != '\0')
+	while (s[i])
 	{
-		if (*(s + i) == c)
+		if (s[i] == c)
 			count++;
 		i++;
 	}
 	return (count);
 }
 
+static char	**error_mal(char **split, int count)
+{
+	while (count-- > 0)
+		free(split[count]);
+	free(split);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char c)
 {
-	char	**split;
 	int		i;
 	int		start;
+	int		count;
+	char	**split;
 
-	i = 0;
-	start = 0;
-	split = (char **)malloc(sizeof(char) * ft_count_words(s, c) + 1);
+	split = (char **)malloc((sizeof(char *) * (count_word(s, c) + 2)));
 	if (!split)
 		return (NULL);
+	i = 0;
+	start = 0;
+	count = 0;
 	while (s[i])
 	{
-		
+		if (s[i] == c)
+		{
+			split[count] = (char *)malloc(sizeof(char) * (i - start + 1));
+			if (!split[count])
+				return (error_mal(split, count));
+			while (start < i)
+				split[count] = (char *)(s + start++);
+			count++;
+			start = i + 1;
+		}
+		i++;
 	}
-	free (split);
 	return (split);
 }
 
-int main (void){
-	char prueba1[100] = "Vamos\ta\tprobar\tque\ttal\tfunciona\testo"; 
-	printf("%s\n", prueba1);
-	printf("%i\n", ft_count_words(prueba1, '\t'));
-	
-	return (0);
-}
+			// split[count][i - start] = '\0';
+			// queda pendiente colocar esto para la última
+// int main (void){
+// 	char **splitted;
+// 	char prueba1[100] = "Hola Mundo!";
+// 	int i = 0;
+// 	splitted = ft_split(prueba1, 'o');
+// 	while (*splitted[i] != '\0')
+// 	{
+// 		printf("%s", splitted[i]);
+// 		i++;
+// 	}
+// 	// while (i-- > 0)
+// 	// 	free(splitted[i]);
+// 	// free(splitted);
+// 	return (0);
+// }
