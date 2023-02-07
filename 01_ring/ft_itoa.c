@@ -6,7 +6,7 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:57:37 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/02 20:46:59 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:08:20 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ft_converse(char *str, int n, int len, int is_neg)
 	}
 }
 
-char	*ft_int_min(char *str, int n, int len)
+static char	*ft_int_min(char *str, int n, int len)
 {
 	int	i;
 

@@ -6,12 +6,11 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 00:10:42 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/02 01:01:41 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:13:13 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <fcntl.h>
 
 static int	ft_intlen(int n)
 {
