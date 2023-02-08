@@ -6,7 +6,7 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:57:37 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/02/07 19:08:20 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:22:53 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,15 @@ char	*ft_itoa(int n)
 		is_neg = -1;
 		n *= is_neg;
 		str = (char *)ft_calloc(sizeof(char), len + 2);
+		if (!str)
+			return (NULL);
 	}
 	else if (n >= 0)
+	{
 		str = (char *)ft_calloc(sizeof(char), len + 1);
-	if (!str)
-		return (NULL);
+		if (!str)
+			return (NULL);
+	}
 	if (n == -2147483648)
 		return (ft_int_min(str, n, len));
 	ft_converse(str, n, len, is_neg);
@@ -96,11 +100,11 @@ char	*ft_itoa(int n)
 }
 
 // int main (void)
-// {
-// 	int num = -2147483648;
-// 	char *str;
-// 	str = ft_itoa(num);
-// 	printf("%s", str);
-// 	free (str);
-// 	return (0);
-// }
+//  {
+//  	int num = -2147483648;
+//  	char *str;
+//  	str = ft_itoa(num);
+//  	printf("%s", str);
+//  	free (str);
+//  	return (0);
+//  }
