@@ -10,6 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
+
 OBJ_DIR		=	./obj
 
 SRCS		=	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
@@ -26,11 +27,15 @@ CFLAGS		= -Wall -Wextra -Werror -I.
 AR			= ar rcs
 RM			= rm -f
 NAME		= libft.a
+INCLUDE = libft.h
 
-all:		$(NAME)
+%.o: %.c ${INCLUDE} Makefile
+			${CC} ${CFLAGS} -c $< -o $@
 
 $(NAME):	$(OBJS)
 			$(AR) $(NAME) $(OBJS)
+
+all:		$(NAME)
 
 clean:
 			$(RM) $(OBJS)
