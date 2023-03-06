@@ -1,38 +1,49 @@
 #!/bin/bash
 
-# Para %CPU, tengo dos soluciones, pero tengo que acabar de validar
-# Mirar també la opción ps -eo "%C", pero hi ha que cambiar el awk a $1
+ARQUITECTURA=$(uname -a)
 
-ps -u | awk '{cpu+=$3} END {printf("%.1f%%\n",cpu)}'
-vmstat 1 2 | tail -1 | awk '{CPU=$15} END {printf("%.1f%%\n", 100-CPU)}'
+VIRTPROC=$(cat /proc/cpuinfo | grep "processor" | wc -l)
 
-# Para saber el último reinicio
-# S'haurà d'ajustar a llenguatge en anglès, jo a casa ho tinc en castellà, però es un ajust ràpid
+PHYSPROC=$(cat /proc/cpuinfo | grep "physical id" | wc -l)
 
-who -b | awk '$1 == "arranque" {print $4 " " $5}'
+MEM_USED=$(free --mega | awk '$1 == "Mem:" {print $3}')
 
-# Per la LVM, no la tinc activa a casa, ho he probat amb la SWAP, s'ha d'ajustar al necessari
+MEM_TOTAL=$(free --mega | grep "Mem:" | awk '{Mem = $2} END {printf("%iMb", Mem)}')
 
-if [ $(lsblk | grep -c "SWAP") > 0 ]; then echo yes; else echo no; fi
-# Es recomana usar -gt en ves de >, però probar les dues maneres
-if [ $(lsblk | grep -c "SWAP") -gt 0 ]; then echo yes; else echo no; fi
+MEM_PCT=$(free --mega | awk '$1 == "Mem:" {printf("(%.2f%%)\n", $3/$2*100)}')
 
-# Les conexions establertes
-# El netstat -na es super lent per a usar-lo
+HD_USED=$(df -m | grep -v "tmpfs" | awk '{use += $3} END {printf("%.2f", use / 1024)}')
 
-ss -ta | grep -c ESTAB
+HD_TOTAL=$(df -m | grep -v "tmpfs" | awk '{use += $2} END {printf("%.2fGb", use / 1024)}')
 
-# Número usuaris al sistema
-# Contem les paraules que surten de users
+HD_PCT=$(df -m | grep -v "tmpfs" | awk '{use += $3} {total +=$2} END {printf("%.2f%%", (use / total)*100)}')
 
-users | wc -w
+CPU_USE=$(ps -eo "%C" | awk '{cpu+=$1} END {printf("%.1f%%\n", cpu)}')
 
-# Captura de IP y MAC, son dos comandos diferentes
-# Con ifconfig -a se lia mucho al saltar todas las interface
+LAST_BOOT=$(who -b | awk '{print $3 " " $4}')
 
-hostname -I #IP
-ip link | grep "link/ether" | awk '{print $2}' #MAC
+LVM_USE=$(if [ $(lsblk | grep "LVM" | wc -l) -gt 0 ]; then echo yes; else echo no; fi)
 
-# Comandos SUDO ejecutados
+TCP_ESTAB=$(ss -ta | grep "ESTAB" | wc -l)
 
-journalctl _COMM=sudo | grep -c COMMAND
+USER_LOGGED=$(users | wc -w)
+
+IP=$(hostname -I | awk '{print $1}')
+
+MAC=$(ip link | grep "link/ether" | awk '{mac = $2} END {printf("(%s)", mac)}')
+
+SUDO_CMD=$(journalctl -q _COMM=sudo | grep COMMAND | wc -l)
+
+wall "
+                #Architecture: $ARQUITECTURA
+                #CPU physical: $PHYSPROC
+                #vCPU: $VIRTPROC
+                #Memory Usage: $MEM_USED/$MEM_TOTAL $MEM_PCT
+                #Disk Usage: $HD_USED/$HD_TOTAL ($HD_PCT)
+                #CPU Load: $CPU_USE
+                #Last Boot: $LAST_BOOT
+                #LVM Use: $LVM_USE
+                #Connections TCP: $TCP_ESTAB ESTABLISHED
+                #User log: $USER_LOGGED
+                #Network IP $IP $MAC
+                #Sudo: $SUDO_CMD cmd"
