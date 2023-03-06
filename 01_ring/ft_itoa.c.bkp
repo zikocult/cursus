@@ -6,7 +6,7 @@
 /*   By: gbarulls <gbarulls@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:57:37 by gbarulls          #+#    #+#             */
-/*   Updated: 2023/03/06 23:15:17 by gbarulls         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:22:53 by gbarulls         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static int	ft_intlen(int n)
 	count = 0;
 	if (n == 0)
 		return (1);
-	if (n < 0)
-		count++;
 	while (n != 0)
 	{
 		n /= 10;
@@ -81,14 +79,19 @@ char	*ft_itoa(int n)
 
 	len = ft_intlen (n);
 	is_neg = 1;
-	str = (char *)ft_calloc(sizeof(char), len + 1);
-	if (!str)
-		return (NULL);
 	if (n < 0)
 	{
-		len--;
 		is_neg = -1;
 		n *= is_neg;
+		str = (char *)ft_calloc(sizeof(char), len + 2);
+		if (!str)
+			return (NULL);
+	}
+	else if (n >= 0)
+	{
+		str = (char *)ft_calloc(sizeof(char), len + 1);
+		if (!str)
+			return (NULL);
 	}
 	if (n == -2147483648)
 		return (ft_int_min(str, n, len));
@@ -97,11 +100,11 @@ char	*ft_itoa(int n)
 }
 
 // int main (void)
-// {
-// 	int num = -3;
-// 	char *str;
-// 	str = ft_itoa(num);
-// 	printf("%s", str);
-// 	free (str);
-// 	return (0);
-// }
+//  {
+//  	int num = -2147483648;
+//  	char *str;
+//  	str = ft_itoa(num);
+//  	printf("%s", str);
+//  	free (str);
+//  	return (0);
+//  }
